@@ -70,7 +70,7 @@ const LoginForm = (props) => {
 
 LoginForm.propTypes = {
     isLogin: PropTypes.bool,
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func
 };
 
 LoginForm.defaultProps = {

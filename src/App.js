@@ -9,15 +9,18 @@ import {
 import LoginForm from "./components/LoginForm";
 import SignUpForm from "./components/Signup";
 import ProductListing from "./components/ProductListing";
+import ProductContext from "./components/ProductContext";
 
 const App = (props) => {
     return (
         <Router>
             <Switch>
-                <Route path='/' exact render={(props) => <LoginForm {...props} isLogin={true}/>}/>
-                <Route path='/signUp' exact render={(props) => <SignUpForm {...props} />}/>
-                <Route path='/productListing' exact component={ProductListing}/>
-                <Redirect to="/"/>
+                <ProductContext.Provider value='hello champ'>
+                    <Route path='/' exact render={(props) => <LoginForm {...props} isLogin={true}/>}/>
+                    <Route path='/signUp' exact render={(props) => <SignUpForm {...props} />}/>
+                    <Route path='/productListing' exact component={ProductListing}/>
+                    <Redirect to="/"/>
+                </ProductContext.Provider>
             </Switch>
         </Router>
     );
