@@ -3,7 +3,6 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link,
     Redirect
 } from "react-router-dom";
 
@@ -15,14 +14,9 @@ const App = (props) => {
     return (
         <Router>
             <Switch>
-                <Route path='/' exact>
-                    <LoginForm
-                        onSubmit={() => true}
-                        isLogin={true}
-                    />
-                </Route>
-                <Route path='/signup' exact component={SignUpForm}/>
-                <Route path='/productlisting' exact component={ProductListing}/>
+                <Route path='/' exact render={(props) => <LoginForm {...props} isLogin={true}/>}/>
+                <Route path='/signUp' exact render={(props) => <SignUpForm {...props} />}/>
+                <Route path='/productListing' exact component={ProductListing}/>
                 <Redirect to="/"/>
             </Switch>
         </Router>

@@ -1,11 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import LoginForm from "../LoginForm";
 import './index.scss';
 
 const SignUpForm = (props) => {
+    const {history: {push} = {}} = props;
     return (
         <LoginForm
-            onSubmit={() => true}
+            onSubmit={(email, password) => {
+                const credentials = JSON.stringify({email, password});
+                localStorage.setItem(email, credentials);
+                push('/');
+            }}
             formLabel='Sign Up Form'
             btnColor='success'
             btnText='SIGN UP'
@@ -13,5 +19,9 @@ const SignUpForm = (props) => {
         />
     );
 }
+
+SignUpForm.propTypes = {
+    onSignUp: PropTypes.func.isRequired
+};
 
 export default SignUpForm;

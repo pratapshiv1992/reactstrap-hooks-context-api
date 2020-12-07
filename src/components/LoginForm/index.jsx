@@ -1,18 +1,39 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import PropTypes from 'prop-types';
-import {Button, Form, FormGroup, Label, Input, Col, Badge} from 'reactstrap';
+import {Button, Form, FormGroup, Label, Input, Col, Badge, Alert} from 'reactstrap';
 import './index.scss';
 
 const LoginForm = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const {onSubmit, formLabel, btnColor, btnText, badgeColor, isLogin} = props;
+    const [error, setError] = useState(false);
+    const {onSubmit, formLabel, btnColor, btnText, badgeColor, isLogin, history: {push} = {}} = props;
     return (
         <div className='login-form-root'>
             <Col sm={6}>
                 <h2><Badge color={badgeColor}>{formLabel}</Badge></h2>
-                <Form onSubmit={onSubmit}>
+                {
+                    error &&
+                    <Alert>
+                        Incorrect username or password.
+                    </Alert>
+                }
+                <Form onSubmit={(e) => {
+                    e.preventDefault();
+                    if (typeof onSubmit === 'function' && !isLogin) {
+                        onSubmit(email, password);
+                    } else {
+                        let data = localStorage.getItem(email) || {};
+                        data = JSON.parse(data);
+                        if (email === data.email && password === data.password) {
+                            push('/productListing');
+                        } else {
+                            setError(true);
+                            setTimeout(() => setError(false), 3000);
+                        }
+                    }
+                }}>
                     <FormGroup>
                         <Label for="exampleEmail">Email</Label>
                         <Input
