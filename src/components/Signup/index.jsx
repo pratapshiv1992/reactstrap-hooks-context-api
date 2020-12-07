@@ -4,7 +4,13 @@ import './index.scss';
 
 const SignUpForm = (props) => {
     return (
-        <LoginForm onSubmit={() => true}/>
+        <LoginForm
+            onSubmit={() => true}
+            formLabel='Sign Up Form'
+            btnColor='success'
+            btnText='SIGN UP'
+            badgeColor='success'
+        />
     );
 }
 

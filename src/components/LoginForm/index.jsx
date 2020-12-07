@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Link} from "react-router-dom";
 import PropTypes from 'prop-types';
 import {Button, Form, FormGroup, Label, Input, Col, Badge} from 'reactstrap';
 import './index.scss';
@@ -6,11 +7,11 @@ import './index.scss';
 const LoginForm = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const {onSubmit} = props;
+    const {onSubmit, formLabel, btnColor, btnText, badgeColor, isLogin} = props;
     return (
         <div className='login-form-root'>
             <Col sm={6}>
-                <h2><Badge color="secondary">Login Form</Badge></h2>
+                <h2><Badge color={badgeColor}>{formLabel}</Badge></h2>
                 <Form onSubmit={onSubmit}>
                     <FormGroup>
                         <Label for="exampleEmail">Email</Label>
@@ -38,7 +39,8 @@ const LoginForm = (props) => {
                             }}
                         />
                     </FormGroup>
-                    <Button color='primary'>Submit</Button>
+                    <Button color={btnColor}>{btnText}</Button>
+                    {isLogin && <span className='signUpBtn'><Link to="/signup">SignUp ?</Link></span>}
                 </Form>
             </Col>
         </div>
@@ -46,11 +48,15 @@ const LoginForm = (props) => {
 }
 
 LoginForm.propTypes = {
+    isLogin: PropTypes.bool,
     onSubmit: PropTypes.func.isRequired
 };
 
 LoginForm.defaultProps = {
-    isLogin: true
+    formLabel: 'Login Form',
+    btnColor: 'primary',
+    btnText: 'LOGIN',
+    badgeColor: 'primary'
 };
 
 export default LoginForm;
