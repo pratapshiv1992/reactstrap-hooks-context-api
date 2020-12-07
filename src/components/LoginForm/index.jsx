@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import {Button, Form, FormGroup, Label, Input, Col, Badge} from 'reactstrap';
-import './index.scss'
+import './index.scss';
 
 const LoginForm = (props) => {
     const [email, setEmail] = useState('');
@@ -43,5 +44,13 @@ const LoginForm = (props) => {
         </div>
     );
 }
+
+LoginForm.propTypes = {
+    onSubmit: PropTypes.func.isRequired
+};
+
+LoginForm.defaultProps = {
+    isLogin: true
+};
 
 export default LoginForm;

@@ -1,11 +1,27 @@
 import React from 'react';
-import {Button, Form, FormGroup, Label, Input, FormText, Col} from 'reactstrap';
-import LoginForm from "./components/LoginForm";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    Redirect
+} from "react-router-dom";
 
-const App = (props) => {
-    return (
-        <LoginForm/>
-    );
-}
+import LoginForm from "./components/LoginForm";
+import SignUpForm from "./components/Signup";
+import ProductListing from "./components/ProductListing";
+
+const App = (props) => (
+    <Router>
+        <Switch>
+            <Route path='/' exact>
+                <LoginForm onSubmit={() => true}/>
+            </Route>
+            <Route path='/signup' exact component={SignUpForm}/>
+            <Route path='/productlisting' exact component={ProductListing}/>
+            <Redirect to="/"/>
+        </Switch>
+    </Router>
+);
 
 export default App;
