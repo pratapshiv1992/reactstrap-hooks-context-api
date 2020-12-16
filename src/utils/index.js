@@ -1,5 +1,8 @@
-const callAPi = (url = 'https://meijerdigital.azurewebsites.net/api/interview', method = 'GET', data) => {
-    return fetch(url, {
+import {API_URL} from './constants'
+
+export const getAPIResponse = (path, method = 'GET', data) => {
+    const api_endpoint = API_URL + path;
+    return fetch(api_endpoint, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -16,8 +19,4 @@ const callAPi = (url = 'https://meijerdigital.azurewebsites.net/api/interview', 
         })).catch(e => console.log('Oops! something went wrong', e));
 
 }
-
-module.exports = {
-    callAPi
-};
 

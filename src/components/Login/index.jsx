@@ -27,7 +27,10 @@ const LoginForm = (props) => {
                         let data = localStorage.getItem(email) || {};
                         data = JSON.parse(data);
                         if (email === data.email && password === data.password) {
-                            push('/productListing');
+                            localStorage.setItem('isAuthenticated', 'true');
+                            setTimeout(() => {
+                                push('/productListing');
+                            }, 500);
                         } else {
                             setError(true);
                             setTimeout(() => setError(false), 3000);
@@ -75,9 +78,9 @@ LoginForm.propTypes = {
 
 LoginForm.defaultProps = {
     formLabel: 'Login Form',
-    btnColor: 'primary',
+    btnColor: 'info',
     btnText: 'LOGIN',
-    badgeColor: 'primary'
+    badgeColor: 'info'
 };
 
 export default LoginForm;

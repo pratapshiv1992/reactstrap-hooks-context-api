@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LoginForm from "../LoginForm";
+import LoginForm from "../Login";
 import './index.scss';
 
 const SignUpForm = (props) => {
