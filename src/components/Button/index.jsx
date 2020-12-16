@@ -3,22 +3,25 @@ import {Button, Tooltip} from 'reactstrap';
 import {withRouter} from "react-router-dom";
 
 const ButtonWrapper = (props) => {
-    const {label, toolTip, onClick} = props;
+    const {id = 'btnToolTip',label, toolTip, onClick, showToolTip = true} = props;
     const [tooltipOpen, setTooltipOpen] = useState(false);
     const toggle = () => setTooltipOpen(!tooltipOpen);
 
     return (
         <>
             <Button
-                id="btnToolTip"
+                id={id}
                 className='cart'
                 color="info"
                 onClick={onClick}>
                 {label}
             </Button>
-            <Tooltip placement="left" isOpen={tooltipOpen} target="btnToolTip" toggle={toggle}>
-                {toolTip}
-            </Tooltip>
+            {
+                showToolTip && <Tooltip placement="left" isOpen={tooltipOpen} target="btnToolTip" toggle={toggle}>
+                    {toolTip}
+                </Tooltip>
+            }
+
         </>
     );
 }

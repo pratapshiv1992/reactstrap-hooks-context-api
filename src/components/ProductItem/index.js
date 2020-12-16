@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import './index.scss';
 
 
-const ProductItem = ({item, addToCart, isAddedToCart, removeFromCart}) => {
+const ProductItem = ({item ={}, addToCart, isAddedToCart, removeFromCart, count}) => {
     return (
         <div>
             <Card>
@@ -19,7 +19,7 @@ const ProductItem = ({item, addToCart, isAddedToCart, removeFromCart}) => {
                             Remove from cart
                         </Button> :
                         <Button onClick={() => addToCart(item)}>
-                            Add to cart
+                            Add to cart ({count})
                         </Button>}
                 </CardBody>
             </Card>

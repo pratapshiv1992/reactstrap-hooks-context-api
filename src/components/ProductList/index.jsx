@@ -9,18 +9,28 @@ import './index.scss';
 
 const ProductListing = (props) => {
     const {history: {push}} = props;
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState({});
     const addToCart = (item) => {
-        if (!cart.some(cartItem => cartItem.code === item.code)) {
-            const value = [...cart];
-            value.push(item);
-            setCart(value);
+        if (cart[item.code]) {
+            const newCart = {...cart};
+            newCart[item.code]['count'] = cart[item.code]['count'] + 1;
+            setCart(newCart);
+        } else {
+            const newCart = {
+                ...cart,
+                [item.code]: {
+                    count: 1,
+                    ...item
+                }
+            };
+            setCart(newCart);
         }
     }
 
-    const removeFromCart = (item) => {
-        const list = cart.filter(cartItem => cartItem.code !== item.code);
-        setCart(list);
+    const cartItems = [];
+    for(let key in cart){
+        const item = cart[key];
+        cartItems.push(item);
     }
 
     return (
@@ -30,9 +40,9 @@ const ProductListing = (props) => {
                     <PageHeading title='Product List'>
                         <Button
                             label='Cart'
-                            toolTip={cart.length}
+                            toolTip={cartItems.reduce((a, b) => a + (b['count'] || 0), 0)}
                             onClick={() => {
-                                push('/cart');
+                                push('/cart', cartItems);
                             }}
                         />
                     </PageHeading>
@@ -43,8 +53,8 @@ const ProductListing = (props) => {
                                     <ProductItem
                                         item={item}
                                         addToCart={addToCart}
-                                        isAddedToCart={cart.some(cartItem => cartItem.code === item.code)}
-                                        removeFromCart={removeFromCart}
+                                        isAddedToCart={false}
+                                        count={(cart[item.code] || {})['count'] || 0}
                                     />
                                 </Col>
                             })}
