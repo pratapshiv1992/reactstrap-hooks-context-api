@@ -79,7 +79,7 @@ const CartList = (props) => {
                 }
                 </tbody>
             </Table>
-            <h2 className='total-amount'>${totalAmount}</h2>
+            <h2 className='total-amount'>Total: ${totalAmount}</h2>
         </Container>
     );
 }
