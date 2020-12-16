@@ -10,7 +10,8 @@ const CartList = (props) => {
     const [productListing, setProductListing] = useState(state);
     const removeItem = (item) => {
         const temp = JSON.parse(JSON.stringify(productListing));
-        const removedItem = temp.find(itm=>itm.code = item.code);
+        const removedItem = temp.find(itm=>itm.code === item.code);
+        debugger
         if(removedItem['count'] > 0){
             removedItem['count'] = removedItem['count'] - 1;
         }
